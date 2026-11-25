@@ -18,6 +18,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { NetworkChip } from "@/components/ui/NetworkChip";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { LogoutButton } from "@/components/auth/LogoutButton";
 import { ACCOUNT_ROUTES as R, loginHref, registerHref } from "./account-routes";
@@ -45,6 +46,11 @@ const itemIcon = "h-4 w-4 shrink-0";
 export function AccountMenu() {
   const { user, loading } = useCurrentUser();
   const protectedHref = (href: string) => (user ? href : loginHref(href));
+  // Guests have their own inbox; hosts and admins keep the dashboard one.
+  // Signed out, the middleware routes a guest from the dashboard inbox after login.
+  const isHost =
+    user?.roles.includes("host") || user?.roles.includes("admin") || false;
+  const messagesHref = user && !isHost ? R.guestMessages : R.messages;
 
   return (
     <DropdownMenu>
@@ -78,7 +84,7 @@ export function AccountMenu() {
 
       <DropdownMenuContent align="end" className="w-60">
         <DropdownMenuItem asChild>
-          <Link href={protectedHref(R.messages)}>
+          <Link href={protectedHref(messagesHref)}>
             <MessageSquare aria-hidden="true" className={itemIcon} />
             Messages
           </Link>
@@ -122,6 +128,15 @@ export function AccountMenu() {
             </DropdownMenuItem>
           </>
         )}
+        <DropdownMenuSeparator />
+        <div
+          role="note"
+          aria-label="Stellar network"
+          className="flex items-center justify-between gap-2 px-2 py-2 text-xs text-muted-foreground"
+        >
+          <span>Payments on</span>
+          <NetworkChip />
+        </div>
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -84,7 +84,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
           variant="outline"
           aria-label="Select analytics date range"
           className={cn(
-            "min-h-11 min-w-0 max-w-full justify-between text-foreground bg-background/50 border-border",
+            "min-h-11 min-w-0 max-w-full justify-between text-foreground bg-background/70 backdrop-blur-sm border-border",
             "hover:bg-muted hover:border-primary/30",
             "transition-all duration-300",
             !value && "",
@@ -142,7 +142,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
             />
 
             {value && (
-              <div className="mt-3 pt-3 border-t border-slate-700">
+              <div className="mt-3 pt-3 border-t border-border">
                 <p className="text-sm text-foreground mb-2">Selected Range:</p>
                 <p className="text-sm font-medium text-foreground">
                   {formatDateRange(value)}
