@@ -60,9 +60,10 @@ export default function SuggestionCard({
 
   return (
     <div
+      data-testid="suggestion-card"
       className={cn(
-        "group w-full rounded-[12px] border border-border bg-card p-3 shadow-sm transition",
-        "hover:border-primary/50 hover:shadow-md",
+        "dashboard-glass-card group w-full rounded-[12px] p-3 transition",
+        "hover:border-primary/50 has-[:focus-visible]:border-primary",
       )}
     >
       <div className="flex items-start gap-3">

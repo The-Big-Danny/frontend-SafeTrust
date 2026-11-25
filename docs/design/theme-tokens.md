@@ -118,6 +118,22 @@ the orange button uses white on orange-700 in light mode and slate-950 on
 orange-500 in dark mode. Re-measure text on the rendered page when changing the
 glass opacity, because the skyline and photos show through it.
 
+## Listing detail glass
+
+`/rent/[id]` reuses `.dashboard-shell` for its backdrop and
+`.dashboard-glass-card` for the price and Suggestions cards, so the no-blur and
+reduced-transparency fallbacks come from `dashboard-glass.css`.
+`src/features/listings/components/detail/listing-detail-glass.css`, scoped to
+`.listing-detail`, adds a card edge that `--glass-border` cannot provide and a
+darker light-mode price green. Measured on the rendered page:
+
+| Pair                      | Light  | Dark   | Target  |
+| ------------------------- | ------ | ------ | ------- |
+| Foreground text on glass  | 19.5:1 | 18.2:1 | ≥ 4.5:1 |
+| Muted text on glass       | 6.9:1  | 8.6:1  | ≥ 4.5:1 |
+| Suggestion price on glass | 5.0:1  | 8.3:1  | ≥ 4.5:1 |
+| Card edge on the backdrop | 3.5:1  | 3.9:1  | ≥ 3:1   |
+
 ## Motion inventory
 
 | Surface                | Effect                   | Duration   | Themes | Reduced motion |

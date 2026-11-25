@@ -1,5 +1,6 @@
 @import "../components/dashboard/ui/dashboard-glass.css";
 @import "../components/home/home-glass.css";
+@import "../features/listings/components/detail/listing-detail-glass.css";
 
 @tailwind base;
 @tailwind components;

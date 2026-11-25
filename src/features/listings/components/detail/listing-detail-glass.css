@@ -1,0 +1,37 @@
+/*
+ * Listing detail (/rent/[id]) glass. The page reuses .dashboard-shell for the
+ * backdrop and .dashboard-glass-card for its cards, including the no-blur and
+ * reduced-transparency fallbacks in dashboard-glass.css. This file only adds
+ * what the page needs on top, scoped to .listing-detail:
+ *
+ * - A stronger card edge. --glass-border is about 1.2:1 over the backdrop, so
+ *   the card boundary would be lost when the glass turns solid. The edge below
+ *   keeps it at 3:1 or more over the backdrop and over the glass in both themes:
+ *     light 215 20% 52% (#6C819D): 4.0:1 on white, 3.6:1 on #F3F4F6
+ *     dark  215 20% 45% (#5C6F8A): 3.9:1 on the page, 3.7:1 on the glass
+ * - A darker price green in light mode. Suggestion prices use --success, which
+ *   is 3.3:1 on white; green-700 is 5.0:1 on white and on the light glass.
+ *
+ * Measure again on the rendered page after changing these values.
+ */
+
+.listing-detail {
+  --listing-glass-edge: 215 20% 52%;
+  --success: 142 72% 29%;
+}
+
+.dark .listing-detail {
+  --listing-glass-edge: 215 20% 45%;
+  --success: 142.1 70.6% 45.3%;
+}
+
+/* :where() keeps this at one class, so hover and focus utilities still win. */
+:where(.listing-detail) .dashboard-glass-card {
+  border-color: hsl(var(--listing-glass-edge));
+}
+
+@media (forced-colors: active) {
+  :where(.listing-detail) .dashboard-glass-card {
+    border-color: CanvasText;
+  }
+}
